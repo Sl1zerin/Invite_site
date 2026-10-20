@@ -6,7 +6,7 @@ services:
     buildCommand: npm install
     startCommand: npm start
     envVars:
-      - key: 8991414041:AAHpg5tg2oYEcXOzp60u8I0SVW3064kvsDk
+      - key: 8991414041:AAEne-b8QH5lN7vGADS-LSr7zEyooPe1-Fg
         sync: false
       - key: 8463339462
         sync: false
