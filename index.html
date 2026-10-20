@@ -291,10 +291,7 @@
         const rsvpForm = document.getElementById('rsvp-form');
         const guestCountField = document.getElementById('guest-count-field');
         const guestCountSelect = document.getElementById('guest-count');
-        const rsvpResult = document.getElementById('rsvp-result');
-        const rsvpMessage = document.getElementById('rsvp-message');
         const rsvpStatus = document.getElementById('rsvp-status');
-        const copyResponseButton = document.getElementById('copy-response');
         const rsvpSubmitButton = document.getElementById('rsvp-submit');
 
         rsvpForm.querySelectorAll('input[name="attendance"]').forEach((input) => {
@@ -314,15 +311,7 @@
             const attendance = String(data.get('attendance') || '');
             const note = String(data.get('note') || '').trim();
             const guestCount = attendance === 'yes' ? Number(data.get('guestCount') || 1) : null;
-            const lines = [
-                `Привет! Это ${guestName}.`,
-                attendance === 'yes'
-                    ? `С радостью приду на свадьбу Дарьи и Никиты. Нас будет: ${guestCount}.`
-                    : 'К сожалению, не смогу присутствовать на свадьбе Дарьи и Никиты.'
-            ];
-            if (note) lines.push(`Сообщение: ${note}`);
-            rsvpMessage.value = lines.join('\n');
-            rsvpResult.hidden = false;
+
             rsvpSubmitButton.disabled = true;
             rsvpSubmitButton.textContent = 'Отправляем…';
             rsvpStatus.textContent = 'Отправляем ответ организаторам…';
@@ -335,20 +324,18 @@
                 });
                 const result = await response.json().catch(() => ({}));
                 if (!response.ok) throw new Error(result.error || 'Не удалось отправить ответ.');
-                if (result.notificationSent === false) {
-                    rsvpStatus.textContent = 'Спасибо! Ответ сохранён в списке гостей, но уведомление в Telegram не отправилось. Организаторы увидят ответ в команде /guests.';
-                } else if (result.partial) {
-                    rsvpStatus.textContent = 'Ответ отправлен не всем организаторам. Запись сохранена в списке гостей.';
+
+                if (result.notificationSent === false || result.partial) {
+                    rsvpStatus.textContent = 'Спасибо! Ответ сохранён.';
                 } else {
-                    rsvpStatus.textContent = 'Спасибо! Ответ сохранён и отправлен организаторам в Telegram.';
+                    rsvpStatus.textContent = 'Спасибо! Ответ отправлен ✓';
                 }
-                rsvpResult.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
             } catch (error) {
-                rsvpStatus.textContent = 'Не удалось отправить ответ в Telegram. Текст остался ниже — скопируй его и отправь организаторам вручную.';
-                rsvpResult.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                rsvpStatus.textContent = 'Не удалось отправить ответ. Попробуй ещё раз чуть позже.';
             } finally {
                 rsvpSubmitButton.disabled = false;
                 rsvpSubmitButton.textContent = 'Отправить ответ';
+                rsvpStatus.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
             }
         });
 
