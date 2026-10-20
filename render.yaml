@@ -10,3 +10,11 @@ services:
         sync: false
       - key: TELEGRAM_CHAT_ID
         sync: false
+      - key: TELEGRAM_CHAT_ID_2
+        sync: false
+      - key: TELEGRAM_ADMIN_USER_IDS
+        sync: false
+      - key: TELEGRAM_WEBHOOK_SECRET
+        sync: false
+      - key: DATABASE_URL
+        sync: false

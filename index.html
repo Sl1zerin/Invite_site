@@ -336,7 +336,13 @@
                 });
                 const result = await response.json().catch(() => ({}));
                 if (!response.ok) throw new Error(result.error || 'Не удалось отправить ответ.');
-                rsvpStatus.textContent = 'Спасибо! Ответ успешно отправлен организаторам в Telegram.';
+                if (result.notificationSent === false) {
+                    rsvpStatus.textContent = 'Спасибо! Ответ сохранён в списке гостей, но уведомление в Telegram не отправилось. Организаторы увидят ответ в команде /guests.';
+                } else if (result.partial) {
+                    rsvpStatus.textContent = 'Ответ отправлен не всем организаторам. Запись сохранена в списке гостей.';
+                } else {
+                    rsvpStatus.textContent = 'Спасибо! Ответ сохранён и отправлен организаторам в Telegram.';
+                }
                 rsvpResult.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
             } catch (error) {
                 rsvpStatus.textContent = 'Не удалось отправить ответ в Telegram. Текст остался ниже — скопируй его и отправь организаторам вручную.';
