@@ -6,7 +6,7 @@ services:
     buildCommand: npm install
     startCommand: npm start
     envVars:
-      - key: TELEGRAM_BOT_TOKEN
+      - key: 8991414041:AAHpg5tg2oYEcXOzp60u8I0SVW3064kvsDk
         sync: false
-      - key: TELEGRAM_CHAT_ID
+      - key: 8463339462
         sync: false
