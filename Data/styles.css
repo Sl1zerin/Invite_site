@@ -819,3 +819,220 @@ body.lightbox-open { overflow: hidden; }
 .rsvp-jump a:hover { background: #a74e55; color: #fffaf6; }
 .rsvp-jump a:focus-visible { outline: 3px solid rgba(178, 98, 84, .45); outline-offset: 3px; }
 @media (prefers-reduced-motion: reduce) { .rsvp-jump a { transition: none; } }
+
+/* ===================== ТЕКСТ ПЕРЕД RSVP ===================== */
+
+.intro-section {
+    width: 100%;
+    max-width: 1100px;
+    margin: clamp(30px, 6vw, 80px) auto;
+    padding: 0 20px;
+    container-type: inline-size;
+    text-align: center;
+    font-family: 'MyCustomFont', sans-serif;
+    color: #4a4a4a;
+    opacity: 0;                 /* появляется, когда блок попадёт в экран */
+}
+
+.intro-section.in-view {
+    animation: introFadeUp 1.4s cubic-bezier(0.25, 1, 0.5, 1) both;
+}
+
+.intro-title {
+    font-weight: normal;
+    font-size: 8cqw;
+    line-height: 1.1;
+    margin-bottom: 4cqw;
+}
+
+.intro-text {
+    max-width: 80%;
+    margin: 0 auto;
+    font-size: 3.6cqw;
+    line-height: 1.4;
+    text-wrap: balance;         /* ровные строки, как на скриншоте */
+}
+
+@keyframes introFadeUp {
+    0%   { opacity: 0; transform: translateY(40px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 600px) {
+    .intro-title { font-size: 11cqw; }
+    .intro-text  { font-size: 5.4cqw; max-width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .intro-section {
+        opacity: 1 !important;
+        animation: none !important;
+    }
+}
+
+/* ===================== ФОТО «ЭТО МЫ» ===================== */
+
+.us-section {
+    width: 100%;
+    max-width: 1100px;
+    margin: clamp(40px, 8vw, 100px) auto;
+    padding: 0 20px;
+    container-type: inline-size;
+    overflow: hidden;
+}
+
+.us-stage {
+    --w: 56cqw;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    padding: 8cqw 0 6cqw;
+}
+
+.us-polaroid {
+    width: var(--w);
+    padding: calc(var(--w) * 0.057) calc(var(--w) * 0.057) calc(var(--w) * 0.300);
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 10px 10px 25px rgba(0, 0, 0, 0.7);
+    transform: rotate(4deg);
+    opacity: 0;
+}
+
+/* Подпись «Это мы» */
+.us-label {
+    position: absolute;
+    top: 38%;
+    left: 4%;
+    z-index: 5;
+    font-family: 'MyCustomFont', sans-serif;
+    font-size: 5cqw;
+    line-height: 1.2;
+    color: #4a4a4a;
+    transform: rotate(-8deg);
+    pointer-events: none;
+    user-select: none;
+    opacity: 0;
+}
+
+.us-label svg {
+    display: block;
+    width: 5cqw;
+    height: auto;
+    margin: 0.5cqw 0 0 3cqw;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    clip-path: inset(0 0 100% 0);                 /* стрелка «рисуется» сверху вниз */
+    transition: clip-path 1.2s ease-out 1.6s;
+}
+
+/* Сердечки */
+.us-heart {
+    position: absolute;
+    z-index: 6;
+    width: 5cqw;
+    min-width: 26px;
+    height: auto;
+    pointer-events: none;
+    opacity: 0;
+}
+.us-heart-1 { left: 19%; top: 8%;  transform: rotate(-10deg); }
+.us-heart-2 { left: 50%; top: 1%;  transform: rotate(8deg);   }
+.us-heart-3 { right: 12%; top: 10%; transform: rotate(14deg); }
+
+/* ===== Анимации после появления в экране ===== */
+
+.us-section.in-view .us-polaroid {
+    animation: usPhotoIn 1.6s cubic-bezier(0.25, 1, 0.5, 1) both;
+}
+.us-section.in-view .us-label {
+    animation: usFade 1.2s ease-out 1.2s both;
+}
+.us-section.in-view .us-label svg {
+    clip-path: inset(0 0 0 0);
+}
+.us-section.in-view .us-heart {
+    animation: usHeartPop 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+.us-section.in-view .us-heart-1 { animation-delay: 0.9s; }
+.us-section.in-view .us-heart-2 { animation-delay: 1.1s; }
+.us-section.in-view .us-heart-3 { animation-delay: 1.3s; }
+
+@keyframes usPhotoIn {
+    0%   { opacity: 0; transform: translateY(120px) rotate(-6deg); }
+    100% { opacity: 1; }
+}
+@keyframes usFade {
+    0%   { opacity: 0; }
+    100% { opacity: 1; }
+}
+@keyframes usHeartPop {
+    0%   { opacity: 0; scale: 0; }
+    100% { opacity: 1; scale: 1; }
+}
+
+/* ===== Мобильный ===== */
+@media (max-width: 600px) {
+    .us-stage { --w: 80cqw; padding-top: 22cqw; }
+    .us-label { top: 2%; left: 6%; font-size: 9cqw; }
+    .us-label svg { width: 9cqw; margin-left: 5cqw; }
+    .us-heart { width: 8cqw; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .us-polaroid, .us-label, .us-heart {
+        opacity: 1 !important;
+        animation: none !important;
+    }
+    .us-label svg { clip-path: none !important; transition: none !important; }
+}
+
+.us-heart {
+    position: absolute;
+    z-index: 6;
+    width: 5cqw;
+    min-width: 26px;
+    height: auto;
+    pointer-events: none;
+    opacity: 0;
+    fill: #fde3e3;
+    stroke: #e0334c;
+    stroke-width: 1.6;
+    stroke-linejoin: round;
+}
+
+/* ===================== СЕРДЕЧКИ ВОКРУГ ФОТО ===================== */
+
+.photo-heart {
+    position: absolute;
+    left: var(--x);
+    top: var(--y);
+    z-index: 5;
+    width: 3cqw;
+    min-width: 22px;
+    aspect-ratio: 1;
+    translate: -50% -50%;          /* центр сердечка ставится ровно в точку x / y */
+    rotate: var(--r, 0deg);
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 21s-7-4.6-9.5-9C.8 8.6 2.6 4.5 6.5 4.5c2.2 0 4 1.3 5.5 3.3 1.5-2 3.3-3.3 5.5-3.3 3.9 0 5.7 4.1 4 7.5C19 16.4 12 21 12 21z' fill='%23fde3e3' stroke='%23e0334c' stroke-width='1.6' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+    pointer-events: none;
+    opacity: 0;                    /* появляются после фото */
+}
+
+.photos-container.in-view .photo-heart {
+    animation: photoHeartPop 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) var(--d, 2s) both;
+}
+
+@keyframes photoHeartPop {
+    0%   { opacity: 0; scale: 0; }
+    100% { opacity: 1; scale: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .photo-heart {
+        opacity: 1 !important;
+        animation: none !important;
+    }
+}
