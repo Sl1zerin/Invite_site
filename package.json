@@ -1,0 +1,12 @@
+{
+  "name": "wedding-invitation-rsvp",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Wedding invitation site with a Telegram RSVP endpoint",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

@@ -162,14 +162,14 @@
                     <textarea id="rsvp-note" name="note" rows="3" maxlength="500" placeholder="Например, передай привет или оставь пожелание"></textarea>
                 </div>
 
-                <button class="rsvp-submit" type="submit">Подготовить ответ</button>
+                <button class="rsvp-submit" id="rsvp-submit" type="submit">Отправить ответ</button>
             </form>
 
             <div class="rsvp-result" id="rsvp-result" hidden>
-                <p class="result-heading">Твой ответ готов</p>
+                <p class="result-heading">Текст твоего ответа</p>
                 <textarea id="rsvp-message" class="rsvp-message" rows="5" readonly aria-label="Текст ответа на приглашение"></textarea>
                 <button class="copy-response" id="copy-response" type="button">Скопировать ответ</button>
-                <p class="rsvp-note">Ответ не отправляется автоматически: скопируй текст и отправь его удобным способом.</p>
+                <p class="rsvp-note">Ответ можно скопировать. При успешной отправке он уже будет доставлен организаторам в Telegram.</p>
             </div>
             <p class="rsvp-status" id="rsvp-status" role="status" aria-live="polite"></p>
         </div>
@@ -287,7 +287,8 @@
             }
         });
 
-        // RSVP формирует текст для копирования; отправки на сервер нет.
+        // RSVP отправляет ответ на сервер сайта, а сервер безопасно пересылает его Telegram-ботом.
+        // Токен Telegram никогда не хранится в браузере.
         const rsvpForm = document.getElementById('rsvp-form');
         const guestCountField = document.getElementById('guest-count-field');
         const guestCountSelect = document.getElementById('guest-count');
@@ -295,6 +296,7 @@
         const rsvpMessage = document.getElementById('rsvp-message');
         const rsvpStatus = document.getElementById('rsvp-status');
         const copyResponseButton = document.getElementById('copy-response');
+        const rsvpSubmitButton = document.getElementById('rsvp-submit');
 
         rsvpForm.querySelectorAll('input[name="attendance"]').forEach((input) => {
             input.addEventListener('change', () => {
@@ -304,24 +306,45 @@
             });
         });
 
-        rsvpForm.addEventListener('submit', (event) => {
+        rsvpForm.addEventListener('submit', async (event) => {
             event.preventDefault();
             if (!rsvpForm.reportValidity()) return;
+
             const data = new FormData(rsvpForm);
-            const name = String(data.get('guestName') || '').trim();
-            const attending = data.get('attendance') === 'yes';
+            const guestName = String(data.get('guestName') || '').trim();
+            const attendance = String(data.get('attendance') || '');
             const note = String(data.get('note') || '').trim();
+            const guestCount = attendance === 'yes' ? Number(data.get('guestCount') || 1) : null;
             const lines = [
-                `Привет! Это ${name}.`,
-                attending
-                    ? `С радостью приду на свадьбу Дарьи и Никиты. Нас будет: ${data.get('guestCount')}.`
+                `Привет! Это ${guestName}.`,
+                attendance === 'yes'
+                    ? `С радостью приду на свадьбу Дарьи и Никиты. Нас будет: ${guestCount}.`
                     : 'К сожалению, не смогу присутствовать на свадьбе Дарьи и Никиты.'
             ];
             if (note) lines.push(`Сообщение: ${note}`);
             rsvpMessage.value = lines.join('\n');
             rsvpResult.hidden = false;
-            rsvpStatus.textContent = 'Ответ подготовлен. Теперь его можно скопировать.';
-            rsvpResult.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            rsvpSubmitButton.disabled = true;
+            rsvpSubmitButton.textContent = 'Отправляем…';
+            rsvpStatus.textContent = 'Отправляем ответ организаторам…';
+
+            try {
+                const response = await fetch('/api/rsvp', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ guestName, attendance, guestCount, note })
+                });
+                const result = await response.json().catch(() => ({}));
+                if (!response.ok) throw new Error(result.error || 'Не удалось отправить ответ.');
+                rsvpStatus.textContent = 'Спасибо! Ответ успешно отправлен организаторам в Telegram.';
+                rsvpResult.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            } catch (error) {
+                rsvpStatus.textContent = 'Не удалось отправить ответ в Telegram. Текст остался ниже — скопируй его и отправь организаторам вручную.';
+                rsvpResult.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            } finally {
+                rsvpSubmitButton.disabled = false;
+                rsvpSubmitButton.textContent = 'Отправить ответ';
+            }
         });
 
         async function copyRsvpText() {
@@ -336,7 +359,7 @@
                     if (!copied) throw new Error('Копирование недоступно');
                     window.getSelection()?.removeAllRanges();
                 }
-                rsvpStatus.textContent = 'Текст скопирован. Отправь его организаторам удобным способом.';
+                rsvpStatus.textContent = 'Текст ответа скопирован.';
             } catch (error) {
                 rsvpMessage.focus();
                 rsvpMessage.select();

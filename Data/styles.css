@@ -723,6 +723,7 @@ body {
 }
 .rsvp-submit:hover, .copy-response:hover { background: #873c46; }
 .rsvp-submit:active, .copy-response:active { transform: translateY(1px); }
+.rsvp-submit:disabled { opacity: .7; cursor: wait; }
 .rsvp-result {
     margin-top: 26px;
     padding-top: 24px;
