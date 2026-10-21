@@ -11,8 +11,10 @@
     <noscript>
         <style>
             .garland-container, .flag-letter, .polaroid, .name, .name_love, .intro-section,
-            .us-polaroid, .us-label, .us-heart, .photo-heart { opacity: 1 !important; }
+            .us-polaroid, .us-label, .us-heart, .photo-heart,
+            .invite-section, .calendar-section, .save-date { opacity: 1 !important; }
             .us-label svg { clip-path: none !important; }
+            .cal-day-main svg { stroke-dashoffset: 0 !important; }
             .name svg { clip-path: none !important; }
         </style>
     </noscript>
@@ -71,14 +73,14 @@
                 </div>
             </div>
             <!-- Сердечки вокруг фото -->
-            <span class="photo-heart" style="--x:17%; --y:22%; --r:-10deg; --d:2.0s" aria-hidden="true"></span>
-            <span class="photo-heart" style="--x:34%; --y:10%; --r:8deg;   --d:2.2s" aria-hidden="true"></span>
-            <span class="photo-heart" style="--x:54%; --y:21%; --r:-6deg;  --d:2.4s" aria-hidden="true"></span>
-            <span class="photo-heart" style="--x:75%; --y:12%; --r:12deg;  --d:2.6s" aria-hidden="true"></span>
-            <span class="photo-heart" style="--x:40%; --y:75%; --r:6deg;   --d:2.8s" aria-hidden="true"></span>
-            <span class="photo-heart" style="--x:23%; --y:80%; --r:-8deg;  --d:3.0s" aria-hidden="true"></span>
-            <span class="photo-heart" style="--x:56%; --y:81%; --r:10deg;  --d:3.2s" aria-hidden="true"></span>
-            <span class="photo-heart" style="--x:73%; --y:73%; --r:-12deg; --d:3.4s" aria-hidden="true"></span>
+            <span class="photo-heart" style="--x:17%; --y:14%; --r:-10deg; --d:2.0s" aria-hidden="true"></span>
+            <span class="photo-heart" style="--x:34%; --y:5%; --r:8deg;   --d:2.2s" aria-hidden="true"></span>
+            <span class="photo-heart" style="--x:54%; --y:14%; --r:-6deg;  --d:2.4s" aria-hidden="true"></span>
+            <span class="photo-heart" style="--x:75%; --y:5%; --r:12deg;  --d:2.6s" aria-hidden="true"></span>
+            <span class="photo-heart" style="--x:40%; --y:83%; --r:6deg;   --d:2.8s" aria-hidden="true"></span>
+            <span class="photo-heart" style="--x:23%; --y:86%; --r:-8deg;  --d:3.0s" aria-hidden="true"></span>
+            <span class="photo-heart" style="--x:56%; --y:87%; --r:10deg;  --d:3.2s" aria-hidden="true"></span>
+            <span class="photo-heart" style="--x:73%; --y:83%; --r:-12deg; --d:3.4s" aria-hidden="true"></span>
             
             <!-- Подпись сверху -->
             <div class="name name-nikita">
@@ -164,6 +166,68 @@
         </div>
     </section>
 
+    <!-- Обращение и дата -->
+    <section class="invite-section">
+        <span class="photo-heart" style="--x:19%; --y:12%; --r:-10deg; --d:1.2s" aria-hidden="true"></span>
+        <span class="photo-heart" style="--x:84%; --y:48%; --r:12deg;  --d:1.5s" aria-hidden="true"></span>
+
+        <h2 class="invite-title">Дорогие наши<br>друзья и родные!</h2>
+        <p class="invite-text">
+            Это официальное приглашение на нашу свадьбу! А получили вы его потому,
+            что мы очень хотим видеть вас в этот день рядом с нами!
+        </p>
+        <p class="date-line" aria-label="4 сентября 2027 года">
+            <span class="date-month">Сентябрь</span>
+            <span class="date-day">4</span>
+            <span class="date-year">2027</span>
+        </p>
+    </section>
+
+    <!-- Календарь -->
+    <section class="calendar-section">
+        <div class="calendar-wrap">
+            <div class="calendar-grid">
+                <span class="cal-head">пн</span><span class="cal-head">вт</span><span class="cal-head">ср</span>
+                <span class="cal-head">чт</span><span class="cal-head">пт</span><span class="cal-head">сб</span>
+                <span class="cal-head">вс</span>
+
+                <span class="cal-day" style="grid-column-start:3">1</span>
+                <span class="cal-day">2</span>
+                <span class="cal-day">3</span>
+                <span class="cal-day cal-day-main">4
+                    <svg viewBox="0 0 100 100" aria-hidden="true">
+                        <path pathLength="1" d="M52 8 C 86 8, 98 40, 88 66 C 78 94, 28 98, 12 68 C 0 42, 22 10, 62 12"/>
+                    </svg>
+                </span>
+                <span class="cal-day">5</span>
+
+                <span class="cal-day">6</span><span class="cal-day">7</span><span class="cal-day">8</span>
+                <span class="cal-day">9</span><span class="cal-day">10</span><span class="cal-day">11</span>
+                <span class="cal-day">12</span>
+
+                <span class="cal-day">13</span><span class="cal-day">14</span><span class="cal-day">15</span>
+                <span class="cal-day">16</span><span class="cal-day">17</span><span class="cal-day">18</span>
+                <span class="cal-day">19</span>
+
+                <span class="cal-day">20</span><span class="cal-day">21</span><span class="cal-day">22</span>
+                <span class="cal-day">23</span><span class="cal-day">24</span><span class="cal-day">25</span>
+                <span class="cal-day">26</span>
+
+                <span class="cal-day">27</span><span class="cal-day">28</span><span class="cal-day">29</span>
+                <span class="cal-day">30</span>
+            </div>
+
+            <div class="save-date">
+                <span>Сохраните<br>дату</span>
+                <svg viewBox="0 0 60 50" aria-hidden="true">
+                    <path d="M56 8 C 36 4, 14 14, 8 40 M8 40 L2 26 M8 40 L17 28"/>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+
+
     <div class="rsvp-jump">
         <a href="#rsvp">Ответить на приглашение <span aria-hidden="true">↓</span></a>
     </div>
@@ -235,7 +299,7 @@
     <script>
         
         // Когда блок попадает в экран, добавляем ему класс in-view, и CSS запускает анимации
-        const targets = document.querySelectorAll('.garland-container, .photos-container, .love-section, .intro-section, .us-section');
+        const targets = document.querySelectorAll('.garland-container, .photos-container, .love-section, .intro-section, .us-section, .invite-section, .calendar-section');
 
         if ('IntersectionObserver' in window) {
             const observer = new IntersectionObserver((entries) => {
