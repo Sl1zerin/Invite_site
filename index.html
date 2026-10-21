@@ -479,7 +479,13 @@
             <p class="rsvp-status" id="rsvp-status" role="status" aria-live="polite"></p>
         </div>
     </section>
+    <audio id="backgroundMusic" autoplay muted loop playsinline preload="auto">
+        <source src="./Data/romans.mp3" type="audio/mpeg">
+    </audio>
 
+    <button id="musicToggle" class="music-toggle" type="button">
+        ♫ Включить музыку
+    </button>
     <!-- Полноэкранный просмотр фотографий -->
     <div class="lightbox" id="photo-lightbox" role="dialog" aria-modal="true" aria-label="Просмотр фотографий" hidden>
         <button class="lightbox-close" type="button" aria-label="Закрыть просмотр">×</button>
@@ -494,7 +500,74 @@
 
 
     <script>
-        
+
+
+
+
+        const music = document.getElementById('backgroundMusic');
+        const button = document.getElementById('musicToggle');
+
+        music.volume = 0.35;
+
+        function updateButton() {
+            if (music.paused) {
+                button.textContent = '♫ Включить музыку';
+            } else if (music.muted) {
+                button.textContent = '♫ Включить звук';
+            } else {
+                button.textContent = '♫ Выключить музыку';
+            }
+        }
+
+        // Автоматически пробуем запустить музыку без звука.
+        music.play().then(updateButton).catch(() => {
+            updateButton();
+        });
+
+        // Включаем звук при первом действии пользователя.
+        function enableSound(event) {
+            if (event.target?.closest?.('#musicToggle')) return;
+
+            music.muted = false;
+
+            music.play().then(() => {
+                updateButton();
+                removeFirstInteractionListeners();
+            }).catch(() => {
+                updateButton();
+            });
+        }
+
+        function removeFirstInteractionListeners() {
+            document.removeEventListener('pointerdown', enableSound);
+            document.removeEventListener('keydown', enableSound);
+        }
+
+        document.addEventListener('pointerdown', enableSound);
+        document.addEventListener('keydown', enableSound);
+
+        // Кнопка управления музыкой.
+        button.addEventListener('click', async () => {
+            try {
+                if (music.paused) {
+                    music.muted = false;
+                    await music.play();
+                } else if (music.muted) {
+                    music.muted = false;
+                } else {
+                    music.pause();
+                }
+
+                updateButton();
+            } catch (error) {
+                updateButton();
+            }
+        });
+
+        music.addEventListener('play', updateButton);
+        music.addEventListener('pause', updateButton);
+
+    
         // Когда блок попадает в экран, добавляем ему класс in-view, и CSS запускает анимации
         const targets = document.querySelectorAll('.garland-container, .photos-container, .love-section, .intro-section, .us-section, .invite-section, .calendar-section, .place-section, .reveal-item');
 
