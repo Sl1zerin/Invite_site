@@ -1208,3 +1208,276 @@ body.lightbox-open { overflow: hidden; }
     }
     .cal-day-main svg { stroke-dashoffset: 0 !important; transition: none !important; }
 }
+
+/* ===================== МЕСТО ПРОВЕДЕНИЯ ===================== */
+
+.place-section {
+    width: 100%;
+    max-width: 1100px;
+    margin: clamp(40px, 8vw, 100px) auto;
+    padding: 0 20px 20px;
+    container-type: inline-size;
+    text-align: center;
+    font-family: 'MyCustomFont', sans-serif;
+    color: #4a4a4a;
+}
+
+.place-title {
+    margin: 0 0 4cqw;
+    font-size: 8.5cqw;
+    font-weight: normal;
+    line-height: 1.1;
+    color: #ef233c;
+}
+
+.place-address {
+    margin: 0 auto 3cqw;
+    font-size: 4cqw;
+    line-height: 1.5;
+    text-wrap: balance;
+}
+
+.place-stage {
+    --w: 48cqw;
+
+    position: relative;
+    display: flex;
+    justify-content: center;
+    padding: 4cqw 0 6cqw;
+}
+
+.place-polaroid {
+    width: var(--w);
+    padding:
+        calc(var(--w) * 0.057)
+        calc(var(--w) * 0.057)
+        calc(var(--w) * 0.300);
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 10px 10px 25px rgba(0, 0, 0, 0.35);
+    transform: rotate(-4deg);
+    opacity: 0;
+}
+
+.place-photo-wrapper {
+    width: 100%;
+    aspect-ratio: 4 / 4;
+    overflow: hidden;
+    background: #eee;
+}
+
+.place-photo-wrapper img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Появление при прокрутке */
+
+.place-section.in-view .place-title {
+    animation: introFadeUp 1.2s ease-out both;
+}
+
+.place-section.in-view .place-address {
+    animation: introFadeUp 1.2s ease-out 0.2s both;
+}
+
+.place-section.in-view .place-polaroid {
+    animation: placePhotoIn 1.5s cubic-bezier(0.25, 1, 0.5, 1)
+        0.4s both;
+}
+
+@keyframes placePhotoIn {
+    0% {
+        opacity: 0;
+        transform: translateY(80px) rotate(8deg);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) rotate(0deg);
+    }
+}
+
+/* Мобильная версия */
+
+@media (max-width: 600px) {
+    .place-title {
+        font-size: 10.5cqw;
+        margin-bottom: 6cqw;
+    }
+
+    .place-address {
+        font-size: 5.2cqw;
+        margin-bottom: 5cqw;
+    }
+
+    .place-stage {
+        --w: 76cqw;
+        padding-top: 5cqw;
+    }
+}
+
+/* Учитываем настройки доступности */
+
+@media (prefers-reduced-motion: reduce) {
+    .place-title,
+    .place-address,
+    .place-polaroid {
+        opacity: 1 !important;
+        animation: none !important;
+        transform: none !important;
+    }
+}
+
+/* ===================== КАК ДОБРАТЬСЯ ===================== */
+.directions-section {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    margin: 50px auto 80px;
+    padding: 30px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 35px;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    font-family: 'MyCustomFont', sans-serif;
+}
+
+.directions-caption {
+    margin: 0;
+    color: #4a4a4a;
+    font-size: clamp(20px, 3vw, 30px);
+    transform: rotate(-7deg);
+}
+
+.directions-button {
+    display: inline-block;
+    padding: 12px 28px;
+    border: 1px solid #ef233c;
+    color: #ef233c;
+    background: transparent;
+    text-decoration: none;
+    text-align: center;
+    font-size: clamp(18px, 2.5vw, 26px);
+    transition:
+        background-color 0.3s ease,
+        color 0.3s ease,
+        transform 0.3s ease;
+}
+
+.directions-button:hover {
+    color: #fff;
+    background-color: #ef233c;
+    transform: translateY(-3px);
+}
+
+@media (max-width: 600px) {
+    .directions-section {
+        gap: 22px;
+        flex-direction: column;
+        margin: 35px auto 55px;
+    }
+
+    .directions-caption {
+        font-size: 24px;
+    }
+
+    .directions-button {
+        font-size: 21px;
+        padding: 12px 24px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .directions-button {
+        transition: none;
+    }
+}
+
+.directions-arrow {
+    display: inline-block;
+    margin-left: 10px;
+    font-size: 1.1em;
+    transition: transform 0.3s ease;
+}
+
+.directions-button:hover .directions-arrow {
+    transform: translate(3px, -3px);
+}
+
+.directions-section {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    margin: 35px auto 70px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    font-family: 'MyCustomFont', sans-serif;
+}
+
+.directions-note {
+    position: absolute;
+    left: calc(50% - 175px);
+    top: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #444;
+    font-size: clamp(18px, 2.5vw, 28px);
+    white-space: nowrap;
+    transform: translateX(-50%) translateY(-80%) rotate(-28deg);
+}
+
+.directions-arrow {
+    width: 42px;
+    height: 48px;
+    margin-top: 2px;
+    margin-left: 25px;
+}
+
+.directions-button {
+    display: inline-block;
+    padding: 10px 25px;
+    border: 1px solid #ef233c;
+    color: #ef233c;
+    background: transparent;
+    text-decoration: none;
+    text-align: center;
+    font-size: clamp(18px, 2.5vw, 26px);
+    white-space: nowrap;
+    box-sizing: border-box;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.directions-button:hover {
+    background: #ef233c;
+    color: #fff;
+}
+
+@media (max-width: 600px) {
+    .directions-section {
+        margin: 30px auto 50px;
+        padding: 20px 10px;
+    }
+
+    .directions-note {
+        left: 3%;
+        font-size: 15px;
+    }
+
+    .directions-arrow {
+        width: 32px;
+        height: 40px;
+    }
+
+    .directions-button {
+        padding: 10px 12px;
+        font-size: 16px;
+    }
+}

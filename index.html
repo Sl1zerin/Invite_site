@@ -228,6 +228,57 @@
 
 
 
+    <!-- ===================== МЕСТО ПРОВЕДЕНИЯ ===================== -->
+    <section class="place-section" aria-labelledby="place-title">
+        <h2 class="place-title" id="place-title">МЕСТО</h2>
+
+        <p class="place-address">
+            Ресторан «Остров»<br>
+            г. Добруш,<br>
+            проспект Луначарского, 1А
+        </p>
+
+        <div class="place-stage">
+            <div class="place-polaroid">
+                <div class="place-photo-wrapper">
+                    <img
+                        src="data/restoran.jpg"
+                        alt="Ресторан «Остров» в городе Добруш"
+                        loading="lazy"
+                    >
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="directions-section">
+        <div class="directions-note">
+            <span>Как добраться</span>
+            <svg class="directions-arrow" viewBox="0 0 60 65"
+                xmlns="http://www.w3.org/2000/svg">
+                <path d="M29 4 C23 19, 27 34, 45 43"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"/>
+                <path d="M34 32 L45 43 L31 44"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"/>
+            </svg>
+        </div>
+
+        <a class="directions-button"
+        href="https://yandex.by/maps/-/CXRjbX5K"
+        target="_blank"
+        rel="noopener noreferrer">
+            Как добраться
+        </a>
+    </section>
+
     <div class="rsvp-jump">
         <a href="#rsvp">Ответить на приглашение <span aria-hidden="true">↓</span></a>
     </div>
@@ -299,7 +350,7 @@
     <script>
         
         // Когда блок попадает в экран, добавляем ему класс in-view, и CSS запускает анимации
-        const targets = document.querySelectorAll('.garland-container, .photos-container, .love-section, .intro-section, .us-section, .invite-section, .calendar-section');
+        const targets = document.querySelectorAll('.garland-container, .photos-container, .love-section, .intro-section, .us-section, .invite-section, .calendar-section, .place-section');
 
         if ('IntersectionObserver' in window) {
             const observer = new IntersectionObserver((entries) => {
