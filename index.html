@@ -25,7 +25,29 @@
     <link href="https://fonts.googleapis.com/css2?family=Neucha&display=swap" rel="stylesheet">
 </head>
 <body>
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+        <defs>
+            <!-- «Дрожание» контура, как у маркера/кисти -->
+            <filter id="rough" x="-10%" y="-10%" width="120%" height="120%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="3" seed="4" result="noise"/>
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="5"/>
+            </filter>
 
+            <symbol id="hand-heart" viewBox="0 0 120 120">
+                <g filter="url(#rough)">
+                    <!-- сама заливка (чуть несимметричная) -->
+                    <path fill="currentColor"
+                        d="M60 110 C38 94 9 72 7 43 C5 22 24 7 42 13 C52 16 58 24 60 32
+                            C63 23 72 14 84 13 C103 11 117 28 113 49 C109 75 82 93 60 110 Z"/>
+                    <!-- светлые «карандашные» линии внутри -->
+                    <g fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="1.6" stroke-linecap="round">
+                        <path d="M99 40 C101 58 88 78 63 100"/>
+                        <path d="M56 34 C51 42 53 52 59 56 C64 52 63 42 56 34 Z"/>
+                    </g>
+                </g>
+            </symbol>
+        </defs>
+    </svg>
     <div class="garland-container">
         <!-- Анимированное изображение гирлянды -->
         <img src="./Data/main-decor.webp" alt="Гирлянда" class="garland-bg">
@@ -79,8 +101,8 @@
             <span class="photo-heart" style="--x:75%; --y:5%; --r:12deg;  --d:2.6s" aria-hidden="true"></span>
             <span class="photo-heart" style="--x:40%; --y:83%; --r:6deg;   --d:2.8s" aria-hidden="true"></span>
             <span class="photo-heart" style="--x:23%; --y:86%; --r:-8deg;  --d:3.0s" aria-hidden="true"></span>
-            <span class="photo-heart" style="--x:56%; --y:87%; --r:10deg;  --d:3.2s" aria-hidden="true"></span>
-            <span class="photo-heart" style="--x:73%; --y:83%; --r:-12deg; --d:3.4s" aria-hidden="true"></span>
+            <span class="photo-heart" style="--x:68%; --y:87%; --r:10deg;  --d:3.2s" aria-hidden="true"></span>
+            <span class="photo-heart" style="--x:87%; --y:74.5%; --r:-12deg; --d:3.4s" aria-hidden="true"></span>
             
             <!-- Подпись сверху -->
             <div class="name name-nikita">
@@ -416,11 +438,11 @@
         </p>
 
         <div class="dresscode-hearts reveal-item">
-            <span class="heart heart-pink">♥</span>
-            <span class="heart heart-wine">♥</span>
-            <span class="heart heart-rose">♥</span>
-            <span class="heart heart-lemon">♥</span>
-            <span class="heart heart-blue">♥</span>
+            <svg class="heart heart-pink"  aria-hidden="true"><use href="#hand-heart"/></svg>
+            <svg class="heart heart-wine"  aria-hidden="true"><use href="#hand-heart"/></svg>
+            <svg class="heart heart-rose"  aria-hidden="true"><use href="#hand-heart"/></svg>
+            <svg class="heart heart-lemon" aria-hidden="true"><use href="#hand-heart"/></svg>
+            <svg class="heart heart-blue"  aria-hidden="true"><use href="#hand-heart"/></svg>
         </div>
 
     </section>

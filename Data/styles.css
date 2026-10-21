@@ -618,7 +618,7 @@ body {
     padding: clamp(24px, 5vw, 48px);
     border: 1px solid rgba(100, 74, 53, .18);
     border-radius: 18px;
-    background: rgba(255, 252, 246, .78);
+    background: rgb(14 13 10 / 0%);
     box-shadow: 0 18px 45px rgba(80, 55, 35, .09);
     text-align: center;
 }
@@ -658,7 +658,7 @@ body {
     width: 100%;
     border: 1px solid #dac9b9;
     border-radius: 10px;
-    background: #fffdfa;
+    background: rgb(14 13 10 / 0%);
     color: #463b34;
     font: inherit;
     padding: 12px 14px;
@@ -696,7 +696,7 @@ body {
     border-radius: 10px;
     cursor: pointer;
     line-height: 1.35;
-    background: rgba(255,255,255,.55);
+    background: rgb(14 13 10 / 0%);;
 }
 .choice-card:has(input:checked) {
     border-color: #b36a54;
@@ -939,7 +939,7 @@ body.lightbox-open { overflow: hidden; }
     pointer-events: none;
     opacity: 0;
 }
-.us-heart-1 { left: 19%; top: 8%;  transform: rotate(-10deg); }
+.us-heart-1 { left: 16%; top: 8%;  transform: rotate(-10deg); }
 .us-heart-2 { left: 50%; top: 1%;  transform: rotate(8deg);   }
 .us-heart-3 { right: 12%; top: 10%; transform: rotate(14deg); }
 
@@ -994,7 +994,8 @@ body.lightbox-open { overflow: hidden; }
     position: absolute;
     z-index: 6;
     width: 5cqw;
-    min-width: 26px;
+    min-width: 22px;
+    max-width: 22px;
     height: auto;
     pointer-events: none;
     opacity: 0;
@@ -1011,8 +1012,9 @@ body.lightbox-open { overflow: hidden; }
     left: var(--x);
     top: var(--y);
     z-index: 5;
-    width: 3cqw;
+    width: 1cqw;
     min-width: 22px;
+    max-width: 22px;
     aspect-ratio: 1;
     translate: -50% -50%;          /* центр сердечка ставится ровно в точку x / y */
     rotate: var(--r, 0deg);
@@ -1627,19 +1629,20 @@ body.lightbox-open { overflow: hidden; }
 }
 
 .heart {
-    display: inline-block;
-    font-family: Arial, sans-serif;
-    font-size: clamp(56px, 8vw, 92px);
-    line-height: 1;
-    -webkit-text-stroke: 1px rgba(255,255,255,0.55);
+    display: block;
+    width: clamp(64px, 9vw, 115px);
+    height: auto;
+    aspect-ratio: 1;
+    fill: currentColor;                 /* цвет берётся из color */
+    mix-blend-mode: multiply;           /* проступает текстура бумаги */
     animation: heartFloat 3s ease-in-out infinite;
 }
 
-.heart-pink  { color: #ffb9bd; }
-.heart-wine  { color: #b64e59; animation-delay: 0.2s; }
-.heart-rose  { color: #d49a96; animation-delay: 0.4s; }
-.heart-lemon { color: #dedfa0; animation-delay: 0.6s; }
-.heart-blue  { color: #b9ccff; animation-delay: 0.8s; }
+.heart-pink  { color: #ffb9bd; rotate: -3deg; }
+.heart-wine  { color: #b64e59; rotate: 2deg;  animation-delay: 0.2s; }
+.heart-rose  { color: #d49a96; rotate: -2deg; animation-delay: 0.4s; }
+.heart-lemon { color: #dedfa0; rotate: 4deg;  animation-delay: 0.6s; }
+.heart-blue  { color: #c3d0ff; rotate: -4deg; animation-delay: 0.8s; }
 
 /* Плавное движение сердечек */
 @keyframes heartFloat {
