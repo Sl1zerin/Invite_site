@@ -1638,11 +1638,11 @@ body.lightbox-open { overflow: hidden; }
     animation: heartFloat 3s ease-in-out infinite;
 }
 
-.heart-pink  { color: #ffb9bd; rotate: -3deg; }
-.heart-wine  { color: #b64e59; rotate: 2deg;  animation-delay: 0.2s; }
-.heart-rose  { color: #d49a96; rotate: -2deg; animation-delay: 0.4s; }
-.heart-lemon { color: #dedfa0; rotate: 4deg;  animation-delay: 0.6s; }
-.heart-blue  { color: #c3d0ff; rotate: -4deg; animation-delay: 0.8s; }
+.heart-pink  { color: #141A3C; rotate: -3deg; }
+.heart-wine  { color: #33425F; rotate: 2deg;  animation-delay: 0.2s; }
+.heart-rose  { color: #3D121B; rotate: -2deg; animation-delay: 0.4s; }
+.heart-lemon { color: #822530; rotate: 4deg;  animation-delay: 0.6s; }
+.heart-blue  { color: #EFEDEE; rotate: -4deg; animation-delay: 0.8s; }
 
 /* Плавное движение сердечек */
 @keyframes heartFloat {
