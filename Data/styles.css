@@ -1643,6 +1643,8 @@ body.lightbox-open { overflow: hidden; }
 .heart-rose  { color: #3D121B; rotate: -2deg; animation-delay: 0.4s; }
 .heart-lemon { color: #822530; rotate: 4deg;  animation-delay: 0.6s; }
 .heart-blue  { color: #EFEDEE; rotate: -4deg; animation-delay: 0.8s; }
+.heart-green { color: #737B70; rotate: -4deg; animation-delay: 0.8s; }
+.heart-black  { color: #222431; rotate: -4deg; animation-delay: 0.8s; }
 
 /* Плавное движение сердечек */
 @keyframes heartFloat {
